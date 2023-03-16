@@ -13,10 +13,10 @@ struct Quick_TipApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationStack(root: {
+            NavigationStack {
                 CalculateView()
-            })
-            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            }
         }
     }
 }

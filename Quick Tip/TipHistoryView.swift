@@ -50,6 +50,7 @@ struct TipHistoryView: View {
                         }
                     }
                     .font(.subheadline)
+//                    .foregroundStyle(GradientColor())
                     .foregroundColor(.accentColor)
 
                     ForEach(tipsByDay[day]!, id: \.self) { tip in
@@ -74,6 +75,7 @@ struct TipHistoryView: View {
         .toolbar {
             ToolbarItem(placement: .destructiveAction) {
                 EditButton()
+//                    .foregroundStyle(GradientColor())
             }
         }
     }

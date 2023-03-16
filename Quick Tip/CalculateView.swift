@@ -13,7 +13,11 @@ struct CalculateView: View {
     @State private var userInput: String = ""
     @State private var selectedTipIndex: Int = 0
     @State private var customTipValue: String = ""
-    @FocusState private var defaultFocusInput: Bool
+    @FocusState private var defaultFocusInput: focusArea?
+    @State private var animateGradient: Bool = true
+    @State private var showCopyNotifyToast: Bool = false
+    private var showCopyNotifySpeed: CGFloat = 0.2
+    private var showCopyNotifyTime: CGFloat = 0.8
 
     private let tipPercentages = [10, 15, 20, 25]
     private let customTipPlaceholder = "Custom"
@@ -37,6 +41,10 @@ struct CalculateView: View {
         customTipValue = ""
     }
 
+    private enum focusArea {
+        case billAmount, customTipAmount
+    }
+
     static let currencyFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
@@ -48,28 +56,87 @@ struct CalculateView: View {
 
     var body: some View {
         VStack {
-            // MARK: - Bill Amount
+            // MARK: - Tip Amount
 
-            VStack(alignment: .leading) {
-                Text("Bill Amount: ")
-                    .foregroundColor(.accentColor).fontWeight(.medium)
-//                    .fontDesign(.monospaced)
-                TextField("Enter the bill amount", text: $userInput)
-                    .keyboardType(.decimalPad)
-                    .font(.largeTitle)
-                    .textFieldStyle(TextFieldUnderlined())
-                    .focused($defaultFocusInput, equals: true)
-                    .onAppear{
-                        self.defaultFocusInput = true
+            ZStack {
+                BoarderedRectangle(radius: 15, lineWidth: 4, animateGradient: true)
+
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack {
+                        Spacer()
+                        NavigationLink(destination: TipHistoryView()) {
+                            Image(systemName: "calendar.badge.clock.rtl")
+                        }
+                    }.font(.title)
+
+                    Spacer()
+
+                    VStack(alignment: .leading, spacing: 16) {
+                        HStack(alignment: .firstTextBaseline) {
+                            Text("Tip: ")
+                                .fontWeight(.medium)
+                                .font(.title2)
+                            
+                            Spacer()
+                            
+                            Text("Copied!")
+                                .font(.callout)
+                                .scaleEffect(showCopyNotifyToast ? 1 : 0.2)
+                                .opacity(showCopyNotifyToast ? 1 : 0)
+                                .animation(.easeIn(duration: showCopyNotifySpeed), value: showCopyNotifyToast)
+                                .foregroundColor(.secondary)
+                        }
+
+                        HStack {
+                            Spacer()
+                            Text("\(Self.currencyFormatter.string(for: tipAmount)!)")
+                                .font(.system(size: 68, weight: .bold, design: .monospaced))
+                                .multilineTextAlignment(.trailing)
+//                                .frame(maxWidth: .infinity)
+                        }
+                        .onTapGesture {
+                            // Copy tip amount
+                            UIPasteboard.general.string = String(tipAmount)
+                            showCopyNotifyToast = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + showCopyNotifyTime) {
+                                showCopyNotifyToast = false
+                            }
+                        }
                     }
-            }.padding(.vertical)
+                }
+                .foregroundStyle(GradientColor())
+                .padding(25)
+            }
+            .onTapGesture {
+                defaultFocusInput = nil
+            }
+
+            Spacer()
 
             // MARK: - Tip Percentage Picker
 
             VStack(alignment: .leading) {
-                Text("Tip Percentage: ")
-                    .foregroundColor(.accentColor).fontWeight(.medium)
-//                    .fontDesign(.monospaced)
+                HStack {
+                    Text("Tip Percentage: ")
+                        .font(.callout)
+                        .fontWeight(.medium)
+                        .foregroundStyle(GradientColor())
+
+                    if selectedTipIndex == tipPercentages.count {
+                        TextField("Enter custom tip percentage", text: $customTipValue)
+                            .keyboardType(.numberPad)
+                            .multilineTextAlignment(.trailing)
+                            .padding(.trailing, 8)
+                            .textFieldStyle(TextFieldEndWith(suffix: "%"))
+                            .font(.callout)
+                            .frame(height: 16)
+                            .focused($defaultFocusInput, equals: .customTipAmount)
+                            .onAppear {
+                                defaultFocusInput = .customTipAmount
+                            }
+                    }
+                }
+
                 Picker(selection: $selectedTipIndex, label: Text("Select tip percentage")) {
                     ForEach(0 ..< tipPercentages.count, id: \.self) { index in
                         Text("\(tipPercentages[index])%")
@@ -79,34 +146,30 @@ struct CalculateView: View {
                 }
                 .pickerStyle(.segmented)
 
-                if selectedTipIndex == tipPercentages.count {
-                    TextField("Enter custom tip percentage", text: $customTipValue)
-                        .keyboardType(.numberPad)
-                        .multilineTextAlignment(.trailing)
-                        .padding(.trailing, 8)
-                        .textFieldStyle(TextFieldEndWith(suffix: "%"))
-                        .font(.callout)
-                }
             }.padding(.vertical)
 
-            Spacer()
-
-            // MARK: - Bottom
-
-            Divider()
             HStack(alignment: .center) {
-                VStack(alignment: .leading) {
-                    Text("Tip amount: ")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                // MARK: - Bill Amount
 
-                    Text("\(Self.currencyFormatter.string(for: tipAmount)!)")
-                        .font(.largeTitle)
-                        .foregroundColor(.accentColor)
-                        .fontWeight(.bold)
+                VStack(alignment: .leading) {
+                    Text("Bill Amount:")
+                        .font(.callout)
+                        .fontWeight(.medium)
+                        .foregroundStyle(GradientColor())
+
+                    TextField("Enter Here", text: $userInput)
+                        .keyboardType(.decimalPad)
+                        .font(.title3)
+                        .textFieldStyle(TextFieldUnderlined())
+                        .focused($defaultFocusInput, equals: .billAmount)
+                        .onAppear {
+                            self.defaultFocusInput = .billAmount
+                        }
                 }
 
                 Spacer()
+
+                // MARK: - Button -> record tip
 
                 Button {
                     saveNewTip(
@@ -115,28 +178,20 @@ struct CalculateView: View {
                         tipAmount: tipAmount
                     )
                     resetValues()
+                    defaultFocusInput = nil
                 } label: {
                     HStack {
                         Text("Record Tip")
                         Image(systemName: "plus.circle.fill").font(.body)
                     }
+                    .foregroundColor(.accentColor)
                 }
-                .buttonStyle(ButtonStyleBorder(cornerRadius: 8, strokeColor: .secondary, lineWidth: 1, isDisabled: userInput == ""))
-//                .disabled(infoNotFilled)
+                .buttonStyle(ButtonStyleBorder(isDisabled: userInput == ""))
             }
         }
         .padding()
         .navigationBarTitle("Quick Tip")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink {
-                    TipHistoryView()
-                } label: {
-                    Image(systemName: "calendar")
-                        .foregroundColor(.accentColor)
-                }
-            }
-        }
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     private func saveNewTip(userInput: Float, tipPercent: Int, tipAmount: Float) {
@@ -151,8 +206,6 @@ struct CalculateView: View {
         } catch {
             print("Error saving tip: \(error.localizedDescription)")
         }
-
-        // Navigagte to TipHistoryView
     }
 }
 
