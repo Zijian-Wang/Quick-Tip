@@ -7,6 +7,16 @@
 
 import CoreData
 
+/// add new calculated var ``timestampFormatted``
+extension Tips {
+    var timestampFormatted: String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter.string(from: timestamp!)
+    }
+}
+
 struct PersistenceController {
     static let shared = PersistenceController()
 
@@ -14,8 +24,11 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newTip = Tips(context: viewContext)
+            newTip.timestamp = Date().addingTimeInterval(96400)
+            newTip.userInput = Float.random(in: 10...500)
+            newTip.tipPercent = Int16.random(in: 10...25)
+            newTip.amount = newTip.userInput * (Float(newTip.tipPercent) / 100.0)
         }
         do {
             try viewContext.save()
