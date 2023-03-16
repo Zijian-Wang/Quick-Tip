@@ -36,47 +36,48 @@ struct TipHistoryView: View {
     }()
 
     var body: some View {
-        List {
-            ForEach(Array(tipsByDay.keys).sorted().reversed(), id: \.self) { day in
-                Section(header: Text(day)) {
-                    HStack {
+        withAnimation {
+            List {
+                ForEach(Array(tipsByDay.keys).sorted().reversed(), id: \.self) { day in
+                    Section(header: Text(day)) {
                         HStack {
-                            Text("Bill: ")
-                            Spacer()
+                            HStack {
+                                Text("Bill: ")
+                                Spacer()
+                            }
+                            HStack {
+                                Text("Tip: ")
+                                Spacer()
+                            }
                         }
-                        HStack {
-                            Text("Tip: ")
-                            Spacer()
-                        }
+                        .font(.subheadline)
+    //                    .foregroundStyle(GradientColor())
+                        .foregroundColor(.accentColor)
+
+                        ForEach(tipsByDay[day]!, id: \.self) { tip in
+
+                            // MARK: - Individual row
+
+                            HStack(alignment: .firstTextBaseline) {
+                                HStack {
+                                    Text("\(amountFormatter.string(for: tip.userInput) ?? "")")
+                                    Spacer()
+                                }
+                                HStack {
+                                    Text("\(amountFormatter.string(for: tip.amount) ?? "")")
+                                    Spacer()
+                                }
+                            }
+                            .fontDesign(.monospaced)
+                        }.onDelete(perform: deleteItems)
                     }
-                    .font(.subheadline)
-//                    .foregroundStyle(GradientColor())
-                    .foregroundColor(.accentColor)
-
-                    ForEach(tipsByDay[day]!, id: \.self) { tip in
-
-                        // MARK: - Individual row
-
-                        HStack(alignment: .firstTextBaseline) {
-                            HStack {
-                                Text("\(amountFormatter.string(for: tip.userInput) ?? "")")
-                                Spacer()
-                            }
-                            HStack {
-                                Text("\(amountFormatter.string(for: tip.amount) ?? "")")
-                                Spacer()
-                            }
-                        }
-                        .fontDesign(.monospaced)
-                    }.onDelete(perform: deleteItems)
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .destructiveAction) {
+                    EditButton()
+                }
         }
-        .toolbar {
-            ToolbarItem(placement: .destructiveAction) {
-                EditButton()
-//                    .foregroundStyle(GradientColor())
-            }
         }
     }
 

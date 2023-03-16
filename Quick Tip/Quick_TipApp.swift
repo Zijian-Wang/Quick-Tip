@@ -15,8 +15,8 @@ struct Quick_TipApp: App {
         WindowGroup {
             NavigationStack {
                 CalculateView()
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
             }
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

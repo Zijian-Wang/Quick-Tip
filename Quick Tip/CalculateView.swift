@@ -56,7 +56,7 @@ struct CalculateView: View {
 
     var body: some View {
         VStack {
-            // MARK: - Tip Amount
+            // MARK: - Top Card
 
             ZStack {
                 BoarderedRectangle(radius: 15, lineWidth: 4, animateGradient: true)
@@ -76,9 +76,9 @@ struct CalculateView: View {
                             Text("Tip: ")
                                 .fontWeight(.medium)
                                 .font(.title2)
-                            
+
                             Spacer()
-                            
+
                             Text("Copied!")
                                 .font(.callout)
                                 .scaleEffect(showCopyNotifyToast ? 1 : 0.2)
@@ -92,15 +92,14 @@ struct CalculateView: View {
                             Text("\(Self.currencyFormatter.string(for: tipAmount)!)")
                                 .font(.system(size: 68, weight: .bold, design: .monospaced))
                                 .multilineTextAlignment(.trailing)
-//                                .frame(maxWidth: .infinity)
-                        }
-                        .onTapGesture {
-                            // Copy tip amount
-                            UIPasteboard.general.string = String(tipAmount)
-                            showCopyNotifyToast = true
-                            DispatchQueue.main.asyncAfter(deadline: .now() + showCopyNotifyTime) {
-                                showCopyNotifyToast = false
-                            }
+                                .onLongPressGesture(perform: {
+                                    // Copy tip amount
+                                    UIPasteboard.general.string = String(tipAmount)
+                                    showCopyNotifyToast = true
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + showCopyNotifyTime) {
+                                        showCopyNotifyToast = false
+                                    }
+                                })
                         }
                     }
                 }
