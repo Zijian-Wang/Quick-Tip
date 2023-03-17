@@ -1,0 +1,17 @@
+/* 
+  Localizable_CN.strings
+  Quick Tip
+
+  Created by Zijian Wang on 2023.03.17.
+  
+*/
+
+"Tip: " = "小费：";
+"Copied!" = "复制成功！";
+"Tip Percentage: " = "小费百分比：";
+"Enter custom tip percentage" = "输入自定义小费";
+"Select tip percentage" = "选择小费百分比";
+"Bill Amount: " = "账单金额";
+"Enter Here" = "点击输入";
+"Record Tip" = "记录小费";
+"Bill: " = "账单：";

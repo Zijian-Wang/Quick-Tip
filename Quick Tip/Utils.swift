@@ -53,7 +53,7 @@ struct ButtonStyleBorder: ButtonStyle {
 struct BoarderedRectangle: View {
     var radius: CGFloat
     var lineWidth: CGFloat
-    var speed: Double = 30
+    var speed: Double = 10
     var hueShiftIntensity: Double = 30
     @State var elapsedTime: TimeInterval = 0
 

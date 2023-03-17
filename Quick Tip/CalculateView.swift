@@ -111,6 +111,7 @@ struct CalculateView: View {
                 .foregroundStyle(GradientColor())
                 .padding(25)
             }
+            .padding(.top)
             .onTapGesture {
                 defaultFocusInput = nil
             }
@@ -156,7 +157,7 @@ struct CalculateView: View {
                 // MARK: - Bill Amount
 
                 VStack(alignment: .leading) {
-                    Text("Bill Amount:")
+                    Text("Bill Amount: ")
                         .font(.callout)
                         .fontWeight(.medium)
                         .foregroundStyle(GradientColor())
