@@ -69,6 +69,7 @@ struct CalculateView: View {
                         NavigationLink(destination: TipHistoryView()) {
                             Image(systemName: "calendar.badge.clock.rtl")
                                 .scaleEffect(showRecordTipAnim ? 0.7 : 1)
+                                .foregroundColor(Color("Secondary"))
                         }
                         .animation(.spring(response: 0.3, dampingFraction: 0.4), value: showRecordTipAnim)
                         .font(.title)
@@ -81,6 +82,7 @@ struct CalculateView: View {
                             Text("Tip: ")
                                 .fontWeight(.medium)
                                 .font(.title2)
+//                                .foregroundColor(.accentColor)
 
                             Spacer()
 
@@ -108,7 +110,8 @@ struct CalculateView: View {
                         }
                     }
                 }
-                .foregroundStyle(GradientColor())
+//                .foregroundStyle(GradientColor())
+                .foregroundColor(.accentColor)
                 .padding(25)
             }
             .padding(.top)
@@ -125,7 +128,8 @@ struct CalculateView: View {
                     Text("Tip Percentage: ")
                         .font(.callout)
                         .fontWeight(.medium)
-                        .foregroundStyle(GradientColor())
+//                        .foregroundStyle(GradientColor())
+                        .foregroundColor(.accentColor)
 
                     if selectedTipIndex == tipPercentages.count {
                         TextField("Enter custom tip percentage", text: $customTipValue)
@@ -160,7 +164,8 @@ struct CalculateView: View {
                     Text("Bill Amount: ")
                         .font(.callout)
                         .fontWeight(.medium)
-                        .foregroundStyle(GradientColor())
+//                        .foregroundStyle(GradientColor())
+                        .foregroundColor(.accentColor)
 
                     TextField("Enter Here", text: $userInput)
                         .keyboardType(.decimalPad)

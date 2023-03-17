@@ -29,7 +29,7 @@ struct TextFieldUnderlined: TextFieldStyle {
 }
 
 func GradientColor() -> LinearGradient {
-    return LinearGradient(colors: [.purple, .blue], startPoint: .topLeading, endPoint: .bottomTrailing)
+    return LinearGradient(colors: [.accentColor, Color("Secondary")], startPoint: .topLeading, endPoint: .bottomTrailing)
 }
 
 struct ButtonStyleBorder: ButtonStyle {
