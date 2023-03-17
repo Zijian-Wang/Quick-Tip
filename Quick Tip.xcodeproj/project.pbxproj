@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2292E2C529C44F120069C630 /* Localizable_CN.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2292E2C729C44F120069C630 /* Localizable_CN.strings */; };
+		2292E2D429C4605B0069C630 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2292E2D629C4605B0069C630 /* Localizable.strings */; };
 		22D9FE2029C1AB6E00228EA1 /* Quick_TipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9FE1F29C1AB6E00228EA1 /* Quick_TipApp.swift */; };
 		22D9FE2229C1AB6E00228EA1 /* TipHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9FE2129C1AB6E00228EA1 /* TipHistoryView.swift */; };
 		22D9FE2429C1AB6F00228EA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22D9FE2329C1AB6F00228EA1 /* Assets.xcassets */; };
@@ -20,7 +20,8 @@
 
 /* Begin PBXFileReference section */
 		2292E2C229C431AF0069C630 /* Quick-Tip-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Quick-Tip-Info.plist"; sourceTree = SOURCE_ROOT; };
-		2292E2C629C44F120069C630 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable_CN.strings"; sourceTree = "<group>"; };
+		2292E2D529C4605B0069C630 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		22B3B4AC29C46198007621E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		22D9FE1C29C1AB6E00228EA1 /* Quick Tip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quick Tip.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D9FE1F29C1AB6E00228EA1 /* Quick_TipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quick_TipApp.swift; sourceTree = "<group>"; };
 		22D9FE2129C1AB6E00228EA1 /* TipHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipHistoryView.swift; sourceTree = "<group>"; };
@@ -63,6 +64,7 @@
 		22D9FE1E29C1AB6E00228EA1 /* Quick Tip */ = {
 			isa = PBXGroup;
 			children = (
+				2292E2D629C4605B0069C630 /* Localizable.strings */,
 				2292E2C229C431AF0069C630 /* Quick-Tip-Info.plist */,
 				22D9FE1F29C1AB6E00228EA1 /* Quick_TipApp.swift */,
 				22D9FE2129C1AB6E00228EA1 /* TipHistoryView.swift */,
@@ -72,7 +74,6 @@
 				22D9FE3529C1CE2700228EA1 /* Utils.swift */,
 				22D9FE2D29C1AB6F00228EA1 /* Info.plist */,
 				22D9FE2A29C1AB6F00228EA1 /* Quick_Tip.xcdatamodeld */,
-				2292E2C729C44F120069C630 /* Localizable_CN.strings */,
 				22D9FE2529C1AB6F00228EA1 /* Preview Content */,
 			);
 			path = "Quick Tip";
@@ -145,8 +146,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2292E2C529C44F120069C630 /* Localizable_CN.strings in Resources */,
 				22D9FE2729C1AB6F00228EA1 /* Preview Assets.xcassets in Resources */,
+				2292E2D429C4605B0069C630 /* Localizable.strings in Resources */,
 				22D9FE2429C1AB6F00228EA1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -170,12 +171,13 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2292E2C729C44F120069C630 /* Localizable_CN.strings */ = {
+		2292E2D629C4605B0069C630 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				2292E2C629C44F120069C630 /* zh-Hans */,
+				2292E2D529C4605B0069C630 /* en */,
+				22B3B4AC29C46198007621E0 /* zh-Hans */,
 			);
-			name = Localizable_CN.strings;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -185,6 +187,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -245,6 +248,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

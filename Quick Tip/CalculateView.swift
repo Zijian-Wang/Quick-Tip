@@ -73,6 +73,7 @@ struct CalculateView: View {
                         }
                         .animation(.spring(response: 0.3, dampingFraction: 0.4), value: showRecordTipAnim)
                         .font(.title)
+                        .padding(.top, 2)
                     }
 
                     Spacer()
@@ -112,7 +113,7 @@ struct CalculateView: View {
                 }
 //                .foregroundStyle(GradientColor())
                 .foregroundColor(.accentColor)
-                .padding(25)
+                .padding()
             }
             .padding(.top)
             .onTapGesture {
@@ -125,14 +126,14 @@ struct CalculateView: View {
 
             VStack(alignment: .leading) {
                 HStack {
-                    Text("Tip Percentage: ")
+                    Text(LocalizedStringKey("Tip Percentage: "))
                         .font(.callout)
                         .fontWeight(.medium)
 //                        .foregroundStyle(GradientColor())
                         .foregroundColor(.accentColor)
 
                     if selectedTipIndex == tipPercentages.count {
-                        TextField("Enter custom tip percentage", text: $customTipValue)
+                        TextField(LocalizedStringKey("Enter custom tip percentage"), text: $customTipValue)
                             .keyboardType(.numberPad)
                             .multilineTextAlignment(.trailing)
                             .padding(.trailing, 8)
@@ -146,7 +147,7 @@ struct CalculateView: View {
                     }
                 }
 
-                Picker(selection: $selectedTipIndex, label: Text("Select tip percentage")) {
+                Picker(selection: $selectedTipIndex, label: Text(LocalizedStringKey("Select tip percentage"))) {
                     ForEach(0 ..< tipPercentages.count, id: \.self) { index in
                         Text("\(tipPercentages[index])%")
                     }
@@ -161,13 +162,13 @@ struct CalculateView: View {
                 // MARK: - Bill Amount
 
                 VStack(alignment: .leading) {
-                    Text("Bill Amount: ")
+                    Text(LocalizedStringKey("Bill Amount: "))
                         .font(.callout)
                         .fontWeight(.medium)
 //                        .foregroundStyle(GradientColor())
                         .foregroundColor(.accentColor)
 
-                    TextField("Enter Here", text: $userInput)
+                    TextField(LocalizedStringKey("Enter Here"), text: $userInput)
                         .keyboardType(.decimalPad)
                         .font(.title3)
                         .textFieldStyle(TextFieldUnderlined())
@@ -194,7 +195,7 @@ struct CalculateView: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { showRecordTipAnim = false }
                 } label: {
                     HStack {
-                        Text("Record Tip")
+                        Text(LocalizedStringKey("Record Tip"))
                         Image(systemName: "plus.circle.fill").font(.body)
                     }
                     .foregroundColor(.accentColor)
