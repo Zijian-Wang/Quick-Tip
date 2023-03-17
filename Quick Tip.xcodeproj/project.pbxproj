@@ -18,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2292E2C229C431AF0069C630 /* Quick-Tip-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Quick-Tip-Info.plist"; sourceTree = SOURCE_ROOT; };
 		22D9FE1C29C1AB6E00228EA1 /* Quick Tip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quick Tip.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D9FE1F29C1AB6E00228EA1 /* Quick_TipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quick_TipApp.swift; sourceTree = "<group>"; };
 		22D9FE2129C1AB6E00228EA1 /* TipHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipHistoryView.swift; sourceTree = "<group>"; };
@@ -60,6 +61,7 @@
 		22D9FE1E29C1AB6E00228EA1 /* Quick Tip */ = {
 			isa = PBXGroup;
 			children = (
+				2292E2C229C431AF0069C630 /* Quick-Tip-Info.plist */,
 				22D9FE1F29C1AB6E00228EA1 /* Quick_TipApp.swift */,
 				22D9FE2129C1AB6E00228EA1 /* TipHistoryView.swift */,
 				22D9FE3329C1BE8100228EA1 /* CalculateView.swift */,
@@ -288,7 +290,7 @@
 				DEVELOPMENT_TEAM = WZ53P9U5LX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = "Quick-Tip-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -317,7 +319,7 @@
 				DEVELOPMENT_TEAM = WZ53P9U5LX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = "Quick-Tip-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

@@ -37,7 +37,6 @@ struct ButtonStyleBorder: ButtonStyle {
     var strokeColor: Color = .secondary
     var lineWidth: CGFloat = 2
     var animation: Bool = true
-    var isDisabled: Bool
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -48,24 +47,25 @@ struct ButtonStyleBorder: ButtonStyle {
                     .foregroundColor(.accentColor)
             )
             .scaleEffect(animation && configuration.isPressed ? 0.95 : 1.0)
-            .opacity(isDisabled ? 0.5 : 1)
     }
 }
 
 struct BoarderedRectangle: View {
     var radius: CGFloat
     var lineWidth: CGFloat
-    @State var animateGradient: Bool = false
     var speed: Double = 5
+    private var animateGradient: Bool {
+        speed != 0
+    }
 
     var body: some View {
         RoundedRectangle(cornerRadius: radius, style: .continuous)
             .strokeBorder(GradientColor(), style: StrokeStyle(lineWidth: lineWidth))
             .hueRotation(.degrees(animateGradient ? 45 : 0))
-            .onAppear {
-                withAnimation(.easeInOut(duration: speed).repeatForever()) {
-                    animateGradient.toggle()
-                }
-            }
+//            .onAppear {
+//                withAnimation(.easeInOut(duration: speed).repeatForever()) {
+//                    animateGradient.togwogle()
+//                }
+//            }
     }
 }

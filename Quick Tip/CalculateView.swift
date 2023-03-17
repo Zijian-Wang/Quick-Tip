@@ -16,8 +16,10 @@ struct CalculateView: View {
     @FocusState private var defaultFocusInput: focusArea?
     @State private var animateGradient: Bool = true
     @State private var showCopyNotifyToast: Bool = false
-    private var showCopyNotifySpeed: CGFloat = 0.2
-    private var showCopyNotifyTime: CGFloat = 0.8
+    private let showCopyNotifySpeed: CGFloat = 0.2
+    private let showCopyNotifyTime: CGFloat = 0.8
+    @State private var showRecordTipAnim: Bool = false
+    private let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
 
     private let tipPercentages = [10, 15, 20, 25]
     private let customTipPlaceholder = "Custom"
@@ -59,15 +61,18 @@ struct CalculateView: View {
             // MARK: - Top Card
 
             ZStack {
-                BoarderedRectangle(radius: 15, lineWidth: 4, animateGradient: true)
+                BoarderedRectangle(radius: 15, lineWidth: 4)
 
                 VStack(alignment: .leading, spacing: 16) {
                     HStack {
                         Spacer()
                         NavigationLink(destination: TipHistoryView()) {
                             Image(systemName: "calendar.badge.clock.rtl")
+                                .scaleEffect(showRecordTipAnim ? 0.7 : 1)
                         }
-                    }.font(.title)
+                        .animation(.spring(response: 0.3, dampingFraction: 0.4), value: showRecordTipAnim)
+                        .font(.title)
+                    }
 
                     Spacer()
 
@@ -171,6 +176,7 @@ struct CalculateView: View {
                 // MARK: - Button -> record tip
 
                 Button {
+                    self.feedbackGenerator.impactOccurred()
                     saveNewTip(
                         userInput: Float(userInput)!,
                         tipPercent: selectedTipPercent,
@@ -178,6 +184,8 @@ struct CalculateView: View {
                     )
                     resetValues()
                     defaultFocusInput = nil
+                    showRecordTipAnim = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { showRecordTipAnim = false }
                 } label: {
                     HStack {
                         Text("Record Tip")
@@ -185,7 +193,8 @@ struct CalculateView: View {
                     }
                     .foregroundColor(.accentColor)
                 }
-                .buttonStyle(ButtonStyleBorder(isDisabled: userInput == ""))
+                .buttonStyle(ButtonStyleBorder())
+                .disabled(userInput == "")
             }
         }
         .padding()
