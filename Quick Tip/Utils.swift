@@ -53,19 +53,18 @@ struct ButtonStyleBorder: ButtonStyle {
 struct BoarderedRectangle: View {
     var radius: CGFloat
     var lineWidth: CGFloat
-    var speed: Double = 5
-    private var animateGradient: Bool {
-        speed != 0
-    }
+    var speed: Double = 3
+    @State var animateGradient: Bool
 
     var body: some View {
         RoundedRectangle(cornerRadius: radius, style: .continuous)
             .strokeBorder(GradientColor(), style: StrokeStyle(lineWidth: lineWidth))
-            .hueRotation(.degrees(animateGradient ? 45 : 0))
-//            .onAppear {
-//                withAnimation(.easeInOut(duration: speed).repeatForever()) {
-//                    animateGradient.togwogle()
-//                }
-//            }
+            // change hue intensity to full circle
+            .hueRotation(.degrees(animateGradient ? 360 : 0))
+            .onAppear {
+                withAnimation(.easeInOut(duration: speed).repeatForever()) {
+                    animateGradient.toggle()
+                }
+            }
     }
 }
