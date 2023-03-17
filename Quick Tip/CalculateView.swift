@@ -61,7 +61,7 @@ struct CalculateView: View {
             // MARK: - Top Card
 
             ZStack {
-                BoarderedRectangle(radius: 15, lineWidth: 4, animateGradient: false)
+                BoarderedRectangle(radius: 15, lineWidth: 4)
 
                 VStack(alignment: .leading, spacing: 16) {
                     HStack {

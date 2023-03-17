@@ -53,17 +53,20 @@ struct ButtonStyleBorder: ButtonStyle {
 struct BoarderedRectangle: View {
     var radius: CGFloat
     var lineWidth: CGFloat
-    var speed: Double = 3
-    var hueShiftIntensity: Double = 45
-    @State var animateGradient: Bool
+    var speed: Double = 30
+    var hueShiftIntensity: Double = 30
+    @State var elapsedTime: TimeInterval = 0
 
     var body: some View {
         RoundedRectangle(cornerRadius: radius, style: .continuous)
             .strokeBorder(GradientColor(), style: StrokeStyle(lineWidth: lineWidth))
-            .hueRotation(.degrees(animateGradient ? hueShiftIntensity : 0))
+            .hueRotation(.degrees(Double(elapsedTime).truncatingRemainder(dividingBy: hueShiftIntensity)))
             .onAppear {
                 withAnimation(.easeInOut(duration: speed).repeatForever()) {
-                    animateGradient.toggle()
+                    let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) {_ in
+                        self.elapsedTime += (0.1 * speed)
+                    }
+                    RunLoop.current.add(timer, forMode: .common)
                 }
             }
     }
