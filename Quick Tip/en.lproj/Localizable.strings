@@ -1,0 +1,17 @@
+/* 
+  Localizable(en).strings
+  Quick Tip
+
+  Created by Zijian Wang on 2023.03.17.
+  
+*/
+
+"Tip: " = "Tip: ";
+"Copied!" = "Copied!";
+"Tip Percentage: " = "Tip Percentage: ";
+"Enter custom tip percentage" = "Enter custom tip percentage";
+"Select tip percentage" = "Select tip percentage";
+"Bill Amount: " = "Bill Amount: ";
+"Enter Here" = "Enter Here";
+"Record Tip" = "Record Tip";
+"Bill: " = "Bill: ";
