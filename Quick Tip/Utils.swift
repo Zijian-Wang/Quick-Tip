@@ -54,13 +54,13 @@ struct BoarderedRectangle: View {
     var radius: CGFloat
     var lineWidth: CGFloat
     var speed: Double = 3
+    var hueShiftIntensity: Double = 45
     @State var animateGradient: Bool
 
     var body: some View {
         RoundedRectangle(cornerRadius: radius, style: .continuous)
             .strokeBorder(GradientColor(), style: StrokeStyle(lineWidth: lineWidth))
-            // change hue intensity to full circle
-            .hueRotation(.degrees(animateGradient ? 360 : 0))
+            .hueRotation(.degrees(animateGradient ? hueShiftIntensity : 0))
             .onAppear {
                 withAnimation(.easeInOut(duration: speed).repeatForever()) {
                     animateGradient.toggle()
